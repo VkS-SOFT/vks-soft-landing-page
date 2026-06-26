@@ -1,16 +1,27 @@
+import { SiteHeader } from "@/components/site-header"
+import { HeroSection } from "@/components/hero-section"
+import { AudienceSection } from "@/components/audience-section"
+import { ServicesSection } from "@/components/services-section"
+import { ProcessSection } from "@/components/process-section"
+import { TestimonialsSection } from "@/components/testimonials-section"
+import { FaqSection } from "@/components/faq-section"
+import { FinalCta } from "@/components/final-cta"
+import { SiteFooter } from "@/components/site-footer"
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            VkS_SOFT_LP
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
+    <div className="min-h-screen bg-background font-sans">
+      <SiteHeader />
+      <main>
+        <HeroSection />
+        <AudienceSection />
+        <ServicesSection />
+        <ProcessSection />
+        <TestimonialsSection />
+        <FaqSection />
+        <FinalCta />
       </main>
+      <SiteFooter />
     </div>
-  );
+  )
 }
