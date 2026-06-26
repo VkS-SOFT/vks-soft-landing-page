@@ -1,5 +1,9 @@
+"use client"
+
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const WHATSAPP_NUMBER = "5586995781666"
 
 const benefits = [
   "Proposta personalizada em até 24h",
@@ -9,6 +13,26 @@ const benefits = [
 ]
 
 export function FinalCta() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const nome = formData.get("nome") as string
+    const telefone = formData.get("telefone") as string
+    const email = formData.get("email") as string
+    const mensagem = formData.get("mensagem") as string
+
+    const texto = `Olá! Me chamo ${nome}.
+Telefone: ${telefone}
+E-mail: ${email}
+
+${mensagem}`
+
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`,
+      "_blank"
+    )
+  }
+
   return (
     <section id="orcamento" className="border-t border-border py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -41,7 +65,7 @@ export function FinalCta() {
               </ul>
             </div>
 
-            <form className="flex flex-col gap-4 rounded-2xl bg-background p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl bg-background p-6 sm:p-8">
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Nome" name="nome" placeholder="Seu nome" />
                 <Field label="WhatsApp" name="telefone" placeholder="(00) 00000-0000" type="tel" />

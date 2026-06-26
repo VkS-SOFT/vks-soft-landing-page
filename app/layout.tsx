@@ -14,10 +14,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'VKS SOFT | Software House — Orçamento em 24h',
+  title: 'VKS SOFT | Software House',
   description:
     'Desenvolvemos aplicativos, sistemas web e integrações sob medida. Proposta em 24h, publicação nas lojas e contrato com garantia. Fale com especialistas.',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
