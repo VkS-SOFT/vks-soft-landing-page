@@ -50,41 +50,42 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* VKS SOFT — tema claro */
 :root {
-  color-scheme: dark;
-  --background: #1b1a1f;
-  --foreground: #e2e2e2;
-  --card: #211f27;
-  --card-foreground: #e2e2e2;
-  --popover: #211f27;
-  --popover-foreground: #e2e2e2;
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #1b1a1f;
+  --card: #ffffff;
+  --card-foreground: #1b1a1f;
+  --popover: #ffffff;
+  --popover-foreground: #1b1a1f;
   --primary: #501bed;
-  --primary-foreground: #f4f1ff;
+  --primary-foreground: #ffffff;
   --secondary: #3f1bad;
-  --secondary-foreground: #f4f1ff;
-  --muted: #2a2832;
-  --muted-foreground: #9b98a6;
-  --accent: #2a2832;
-  --accent-foreground: #e2e2e2;
+  --secondary-foreground: #ffffff;
+  --muted: #f4f3f7;
+  --muted-foreground: #5c5966;
+  --accent: #efeaff;
+  --accent-foreground: #3f1bad;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.14);
+  --border: #e2e2e2;
+  --input: #e2e2e2;
   --ring: #501bed;
   --brand: #501bed;
-  --brand-foreground: #f4f1ff;
+  --brand-foreground: #ffffff;
   --chart-1: #501bed;
   --chart-2: #3f1bad;
   --chart-3: #7a52f2;
-  --chart-4: #9b98a6;
-  --chart-5: #e2e2e2;
+  --chart-4: #b9a8f7;
+  --chart-5: #1b1a1f;
   --radius: 0.75rem;
-  --sidebar: #211f27;
-  --sidebar-foreground: #e2e2e2;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1b1a1f;
   --sidebar-primary: #501bed;
-  --sidebar-primary-foreground: #f4f1ff;
-  --sidebar-accent: #2a2832;
-  --sidebar-accent-foreground: #e2e2e2;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #efeaff;
+  --sidebar-accent-foreground: #3f1bad;
+  --sidebar-border: #e2e2e2;
   --sidebar-ring: #501bed;
 }
 

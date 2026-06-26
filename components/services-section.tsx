@@ -74,15 +74,39 @@ export function ServicesSection() {
             ))}
           </div>
 
-          <div className="relative lg:sticky lg:top-24">
-            <div className="absolute inset-0 -z-10 rounded-3xl bg-primary/10 blur-2xl" />
-            <Image
-              src="/work-showcase.png"
-              alt="Exemplos de aplicativos e sistemas web desenvolvidos pela VKS SOFT"
-              width={720}
-              height={720}
-              className="w-full rounded-2xl border border-border"
-            />
+          <div className="lg:sticky lg:top-24">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-primary p-6">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-secondary/60 blur-3xl"
+              />
+              <Image
+                src="/feature-web.png"
+                alt="Sistema web administrativo desenvolvido pela VKS SOFT"
+                width={720}
+                height={480}
+                className="w-full rounded-xl bg-card"
+              />
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <Image
+                  src="/feature-mobile.png"
+                  alt="Aplicativo mobile desenvolvido pela VKS SOFT"
+                  width={360}
+                  height={360}
+                  className="w-full rounded-xl bg-card"
+                />
+                <Image
+                  src="/feature-integrations.png"
+                  alt="Integrações entre sistemas desenvolvidas pela VKS SOFT"
+                  width={360}
+                  height={360}
+                  className="w-full rounded-xl bg-card"
+                />
+              </div>
+              <p className="mt-5 text-pretty text-sm font-medium leading-relaxed text-primary-foreground">
+                Do app na palma da mão ao sistema completo no navegador, tudo conectado e seguro.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -60,12 +60,16 @@ export function AudienceSection() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 rounded-2xl border border-border bg-card p-8 text-center sm:flex-row sm:text-left">
-          <div>
-            <h3 className="font-heading text-xl font-semibold text-card-foreground">
+        <div className="relative mt-12 flex flex-col items-center justify-between gap-6 overflow-hidden rounded-2xl bg-primary p-8 text-center sm:flex-row sm:text-left">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-10 -bottom-10 h-44 w-44 rounded-full bg-secondary/60 blur-3xl"
+          />
+          <div className="relative">
+            <h3 className="font-heading text-xl font-semibold text-primary-foreground">
               Se encaixa? Vamos conversar
             </h3>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-primary-foreground/80">
               Resposta em até 24 horas, sem compromisso.
             </p>
           </div>
@@ -73,7 +77,7 @@ export function AudienceSection() {
             href="#orcamento"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-primary text-primary-foreground hover:bg-secondary",
+              "relative bg-background text-primary hover:bg-accent",
             )}
           >
             Quero meu orçamento gratuito

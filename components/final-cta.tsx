@@ -12,24 +12,27 @@ export function FinalCta() {
   return (
     <section id="orcamento" className="border-t border-border py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-3xl bg-primary p-8 sm:p-12 lg:p-16">
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[120px]"
+            className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-secondary/70 blur-[120px]"
           />
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="text-balance font-heading text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="text-balance font-heading text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
                 Vamos transformar sua ideia em software
               </h2>
-              <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-pretty leading-relaxed text-primary-foreground/80">
                 Conte sobre seu projeto e receba uma proposta sob medida. Sem compromisso e com
                 resposta em até 24 horas.
               </p>
               <ul className="mt-8 space-y-3">
                 {benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-center gap-3 text-sm text-card-foreground">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-primary">
+                  <li
+                    key={benefit}
+                    className="flex items-center gap-3 text-sm text-primary-foreground"
+                  >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20 text-primary-foreground">
                       <Check className="h-3.5 w-3.5" />
                     </span>
                     {benefit}
@@ -38,7 +41,7 @@ export function FinalCta() {
               </ul>
             </div>
 
-            <form className="flex flex-col gap-4">
+            <form className="flex flex-col gap-4 rounded-2xl bg-background p-6 sm:p-8">
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Nome" name="nome" placeholder="Seu nome" />
                 <Field label="WhatsApp" name="telefone" placeholder="(00) 00000-0000" type="tel" />
@@ -53,7 +56,7 @@ export function FinalCta() {
                   name="mensagem"
                   rows={4}
                   placeholder="Conte o que você precisa..."
-                  className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+                  className="w-full resize-none rounded-lg border border-border bg-muted px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
                 />
               </div>
               <Button
@@ -95,7 +98,7 @@ function Field({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+        className="w-full rounded-lg border border-border bg-muted px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
       />
     </div>
   )
