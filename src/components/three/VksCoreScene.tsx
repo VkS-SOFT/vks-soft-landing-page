@@ -294,11 +294,11 @@ const VksDeveloperLaptop3D: React.FC<{
     return keys;
   }, []);
 
-  // Escala dinâmica baseada na largura da tela para caber 100% dentro do quadro
+  // Escala dinâmica baseada na largura da tela (+1% de escala conforme solicitado)
   const isMobile = viewport.width < 6.2;
   const responsiveScale = isMobile
-    ? Math.min(viewport.width * 0.14, 0.56)
-    : Math.min(viewport.width * 0.086, 0.75);
+    ? Math.min(viewport.width * 0.1414, 0.5656)
+    : Math.min(viewport.width * 0.08686, 0.7575);
 
   useFrame((_, delta) => {
     if (!laptopGroupRef.current) return;
