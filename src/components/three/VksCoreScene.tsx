@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import {
   Float,
   Environment,
@@ -169,8 +169,8 @@ const CodeSymbol3D: React.FC<{
   useFrame((state) => {
     if (!symbolRef.current) return;
     symbolRef.current.position.y =
-      position[1] + Math.sin(state.clock.elapsedTime * 2.2) * 0.12;
-    symbolRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.9) * 0.25;
+      position[1] + Math.sin(state.clock.elapsedTime * 2.2) * 0.08;
+    symbolRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.9) * 0.22;
   });
 
   const barRadius = 0.085;
@@ -179,12 +179,12 @@ const CodeSymbol3D: React.FC<{
   return (
     <group ref={symbolRef} position={position} scale={scale}>
       {/* Símbolo "<" (Esquerda) */}
-      <group position={[-1.05, 0, 0]}>
+      <group position={[-0.95, 0, 0]}>
         <RoundedBox
-          args={[barThickness, 0.78, barThickness]}
+          args={[barThickness, 0.72, barThickness]}
           radius={barRadius}
           smoothness={4}
-          position={[0, 0.23, 0]}
+          position={[0, 0.21, 0]}
           rotation={[0, 0, -Math.PI / 4]}
         >
           <meshStandardMaterial
@@ -196,10 +196,10 @@ const CodeSymbol3D: React.FC<{
           />
         </RoundedBox>
         <RoundedBox
-          args={[barThickness, 0.78, barThickness]}
+          args={[barThickness, 0.72, barThickness]}
           radius={barRadius}
           smoothness={4}
-          position={[0, -0.23, 0]}
+          position={[0, -0.21, 0]}
           rotation={[0, 0, Math.PI / 4]}
         >
           <meshStandardMaterial
@@ -214,10 +214,10 @@ const CodeSymbol3D: React.FC<{
 
       {/* Barra "/" (Centro) */}
       <RoundedBox
-        args={[barThickness, 1.38, barThickness]}
+        args={[barThickness, 1.25, barThickness]}
         radius={barRadius}
         smoothness={4}
-        position={[0, 0, 0.08]}
+        position={[0, 0, 0.06]}
         rotation={[0, 0, -0.38]}
       >
         <meshStandardMaterial
@@ -230,12 +230,12 @@ const CodeSymbol3D: React.FC<{
       </RoundedBox>
 
       {/* Símbolo ">" (Direita) */}
-      <group position={[1.05, 0, 0]}>
+      <group position={[0.95, 0, 0]}>
         <RoundedBox
-          args={[barThickness, 0.78, barThickness]}
+          args={[barThickness, 0.72, barThickness]}
           radius={barRadius}
           smoothness={4}
-          position={[0, 0.23, 0]}
+          position={[0, 0.21, 0]}
           rotation={[0, 0, Math.PI / 4]}
         >
           <meshStandardMaterial
@@ -247,10 +247,10 @@ const CodeSymbol3D: React.FC<{
           />
         </RoundedBox>
         <RoundedBox
-          args={[barThickness, 0.78, barThickness]}
+          args={[barThickness, 0.72, barThickness]}
           radius={barRadius}
           smoothness={4}
-          position={[0, -0.23, 0]}
+          position={[0, -0.21, 0]}
           rotation={[0, 0, -Math.PI / 4]}
         >
           <meshStandardMaterial
@@ -267,7 +267,8 @@ const CodeSymbol3D: React.FC<{
 };
 
 /**
- * Notebook 3D Ultra-Clean (DevBook Pro VKS) + Holograma "</>" pairando acima do teclado
+ * Notebook 3D Ultra-Clean (DevBook Pro VKS) + Holograma "</>"
+ * Responsivo aos limites reais do viewport para nunca cortar nas bordas da tela
  */
 const VksDeveloperLaptop3D: React.FC<{
   scrollProgress: number;
@@ -276,6 +277,7 @@ const VksDeveloperLaptop3D: React.FC<{
 }> = ({ scrollProgress, mousePos, activeServiceIndex }) => {
   const laptopGroupRef = useRef<THREE.Group>(null);
   const screenTexture = useCodeScreenTexture();
+  const { viewport } = useThree();
 
   // Posição das teclas mecânicas retroiluminadas no chassi
   const keyPositions = useMemo(() => {
@@ -292,33 +294,48 @@ const VksDeveloperLaptop3D: React.FC<{
     return keys;
   }, []);
 
+  // Escala dinâmica baseada na largura da tela para caber 100% dentro do quadro
+  const isMobile = viewport.width < 6.2;
+  const responsiveScale = isMobile
+    ? Math.min(viewport.width * 0.14, 0.56)
+    : Math.min(viewport.width * 0.088, 0.76);
+
   useFrame((_, delta) => {
     if (!laptopGroupRef.current) return;
 
-    // Posicionamento dinâmico: no Hero fica à esquerda/topo do card ou centralizado sem colidir com o texto
-    const targetX = scrollProgress < 0.28 ? 2.15 : scrollProgress < 0.68 ? -2.35 : 1.9;
-    const targetY = scrollProgress < 0.28 ? 0.55 : -0.15;
-    const targetZ = scrollProgress < 0.28 ? -0.3 : -0.6;
+    // Limites seguros horizontais e verticais baseados no viewport real da câmera
+    const safeOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.22, 1.65);
+
+    const targetX =
+      scrollProgress < 0.28
+        ? safeOffsetX
+        : scrollProgress < 0.68
+        ? -safeOffsetX
+        : safeOffsetX * 0.75;
+
+    const targetY = isMobile ? 0.65 : scrollProgress < 0.28 ? 0.35 : -0.15;
+    const targetZ = -0.4;
 
     laptopGroupRef.current.position.x = THREE.MathUtils.lerp(
       laptopGroupRef.current.position.x,
       targetX,
-      delta * 3.5
+      delta * 4
     );
     laptopGroupRef.current.position.y = THREE.MathUtils.lerp(
       laptopGroupRef.current.position.y,
       targetY,
-      delta * 3.5
+      delta * 4
     );
     laptopGroupRef.current.position.z = THREE.MathUtils.lerp(
       laptopGroupRef.current.position.z,
       targetZ,
-      delta * 3.5
+      delta * 4
     );
 
-    // Rotação suave seguindo o mouse + scroll
-    const targetRotY = -0.42 + mousePos.x * 0.28 + scrollProgress * 0.55;
-    const targetRotX = 0.22 - mousePos.y * 0.15;
+    // Rotação suave seguindo o mouse + scroll (sem girar demais para não sair do quadro)
+    const baseRotY = scrollProgress < 0.28 ? -0.38 : scrollProgress < 0.68 ? 0.38 : -0.25;
+    const targetRotY = baseRotY + mousePos.x * 0.22;
+    const targetRotX = 0.2 - mousePos.y * 0.12;
 
     laptopGroupRef.current.rotation.y = THREE.MathUtils.lerp(
       laptopGroupRef.current.rotation.y,
@@ -336,13 +353,18 @@ const VksDeveloperLaptop3D: React.FC<{
     activeServiceIndex === 1 ? '#8F6BFF' : activeServiceIndex === 2 ? '#27C93F' : '#501BED';
 
   return (
-    <group ref={laptopGroupRef} position={[2.15, 0.55, -0.3]} rotation={[0.22, -0.42, 0]}>
-      <Float speed={2.0} rotationIntensity={0.18} floatIntensity={0.45}>
-        {/* Símbolo Holográfico 3D "</>" flutuando em destaque acima do Notebook */}
-        <CodeSymbol3D position={[0, 1.85, 0.35]} scale={0.78} accentColor={accentColor} />
+    <group
+      ref={laptopGroupRef}
+      position={[1.45, 0.35, -0.4]}
+      rotation={[0.2, -0.38, 0]}
+      scale={responsiveScale}
+    >
+      <Float speed={1.8} rotationIntensity={0.12} floatIntensity={0.3}>
+        {/* Símbolo Holográfico 3D "</>" flutuando em altura contida logo acima da tela */}
+        <CodeSymbol3D position={[0, 1.52, 0.25]} scale={0.68} accentColor={accentColor} />
 
         {/* ================= BASE DO NOTEBOOK (CHASSI INFERIOR) ================= */}
-        <group position={[0, -0.4, 0]}>
+        <group position={[0, -0.55, 0]}>
           {/* Corpo de Alumínio Space Black (#1B1A1F) */}
           <RoundedBox args={[3.1, 0.14, 2.15]} radius={0.05} smoothness={4}>
             <meshStandardMaterial
@@ -398,7 +420,7 @@ const VksDeveloperLaptop3D: React.FC<{
           </mesh>
 
           {/* ================= TAMPA / TELA DO NOTEBOOK ================= */}
-          <group position={[0, 0.07, -1.02]} rotation={[-0.28, 0, 0]}>
+          <group position={[0, 0.07, -1.02]} rotation={[-0.26, 0, 0]}>
             {/* Moldura Traseira da Tela */}
             <RoundedBox
               args={[3.1, 2.05, 0.09]}
@@ -429,9 +451,9 @@ const VksDeveloperLaptop3D: React.FC<{
 
         {/* Sombra de Contato realista sob o notebook */}
         <ContactShadows
-          position={[0, -0.85, 0]}
+          position={[0, -0.95, 0]}
           opacity={0.55}
-          scale={7}
+          scale={6.5}
           blur={2.4}
           far={2.5}
           color="#501BED"
@@ -500,17 +522,17 @@ export const VksCoreScene: React.FC<SceneProps> = ({
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Glow Radial Ambiental no Background */}
       <div
-        className="absolute w-[640px] h-[640px] rounded-full blur-[150px] opacity-25 transition-all duration-1000 pointer-events-none"
+        className="absolute w-[580px] h-[580px] rounded-full blur-[150px] opacity-25 transition-all duration-1000 pointer-events-none"
         style={{
           background: 'radial-gradient(circle, #501BED 0%, rgba(80,27,237,0) 70%)',
-          top: `${22 + scrollProgress * 40}%`,
-          left: scrollProgress < 0.3 ? '68%' : scrollProgress < 0.7 ? '22%' : '55%',
+          top: `${26 + scrollProgress * 38}%`,
+          left: scrollProgress < 0.3 ? '66%' : scrollProgress < 0.7 ? '26%' : '55%',
           transform: 'translate(-50%, -50%)',
         }}
       />
 
       <Canvas
-        camera={{ position: [0, 0.2, 6.4], fov: 42 }}
+        camera={{ position: [0, 0.1, 7.2], fov: 40 }}
         dpr={[1, 1.75]}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
