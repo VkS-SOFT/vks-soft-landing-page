@@ -298,22 +298,23 @@ const VksDeveloperLaptop3D: React.FC<{
   const isMobile = viewport.width < 6.2;
   const responsiveScale = isMobile
     ? Math.min(viewport.width * 0.14, 0.56)
-    : Math.min(viewport.width * 0.088, 0.76);
+    : Math.min(viewport.width * 0.086, 0.75);
 
   useFrame((_, delta) => {
     if (!laptopGroupRef.current) return;
 
-    // Limites seguros horizontais e verticais baseados no viewport real da câmera
-    const safeOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.22, 1.65);
+    // Alinha exatamente na coluna da direita (afastado do título à esquerda) e mais abaixo
+    const heroOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.275, 2.38);
+    const sectionOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.25, 2.15);
 
     const targetX =
       scrollProgress < 0.28
-        ? safeOffsetX
+        ? heroOffsetX
         : scrollProgress < 0.68
-        ? -safeOffsetX
-        : safeOffsetX * 0.75;
+        ? -sectionOffsetX
+        : heroOffsetX * 0.85;
 
-    const targetY = isMobile ? 0.65 : scrollProgress < 0.28 ? 0.35 : -0.15;
+    const targetY = isMobile ? 0.35 : scrollProgress < 0.28 ? -0.18 : -0.25;
     const targetZ = -0.4;
 
     laptopGroupRef.current.position.x = THREE.MathUtils.lerp(
@@ -355,7 +356,7 @@ const VksDeveloperLaptop3D: React.FC<{
   return (
     <group
       ref={laptopGroupRef}
-      position={[1.45, 0.35, -0.4]}
+      position={[2.32, -0.18, -0.4]}
       rotation={[0.2, -0.38, 0]}
       scale={responsiveScale}
     >

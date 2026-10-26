@@ -109,7 +109,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Coluna Direita: Espaço dedicado para visualização do Notebook 3D + "</>" no topo e HUD compacto na base */}
-          <div className="lg:col-span-5 relative flex flex-col items-end justify-end lg:pt-64">
+          <div className="lg:col-span-5 relative flex flex-col items-end justify-end lg:pt-80">
             <div className="hero-hud-card w-full max-w-md glass-card rounded-3xl p-5 sm:p-6 border border-vks-primary/35 shadow-2xl relative overflow-hidden">
               {/* Barra de topo estilo terminal de engenharia */}
               <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-vks-white/10">
