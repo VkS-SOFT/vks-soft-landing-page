@@ -27,32 +27,32 @@ interface LeadQualifierFormProps {
 
 const SOLUTION_PILLARS = [
   {
-    id: 'Desenvolvimento Web & Sistemas Sob Medida',
-    title: 'Web, SaaS & Sistemas Sob Medida',
-    desc: 'Plataformas SaaS, ERPs, Portais Corporativos e Dashboards em Tempo Real',
+    id: 'Construtoras & Incorporadoras',
+    title: 'Construtoras & Incorporadoras',
+    desc: 'Gestão de obras, orçamento, cronograma, medições e app para o canteiro',
   },
   {
-    id: 'Aplicativos Mobile & Cross-Platform',
-    title: 'Aplicativos Mobile (iOS & Android)',
-    desc: 'Apps em Flutter / Nativos de alta performance, offline-first e pagamentos',
+    id: 'Imobiliárias & Avaliação de Imóveis',
+    title: 'Imobiliárias & Avaliação de Imóveis',
+    desc: 'CRM imobiliário, portais de imóveis, laudos (NBR 14653) e vistorias',
   },
   {
-    id: 'Automações, IA & Arquitetura de Alta Performance',
-    title: 'Automações, IA & APIs de Alta Vazão',
-    desc: 'Agentes LLM, Bots, Filas Assíncronas, Integrações de ERPs e WebSockets',
+    id: 'Escritórios de Engenharia & Arquitetura',
+    title: 'Escritórios de Engenharia & Arquitetura',
+    desc: 'Sites que geram clientes, simuladores, propostas e gestão de projetos',
   },
   {
-    id: 'Ecossistema Completo (Web + Mobile + IA)',
-    title: 'Ecossistema Completo (Web + Mobile + IA)',
-    desc: 'Arquitetura ponta a ponta integrando plataforma web, aplicativo e automações',
+    id: 'Outro negócio do setor',
+    title: 'Outro negócio do setor',
+    desc: 'Loteadoras, administradoras de condomínio, lojas de materiais, energia solar e afins',
   },
 ];
 
 const PROJECT_STAGES = [
-  'Ideia estruturada / Planejamento de MVP',
-  'Sistema já em operação precisando escalar ou refatorar',
-  'Substituição de processos manuais / planilhas por sistema próprio',
-  'Demanda urgente de engenharia / Squad dedicado',
+  'Tenho uma ideia de sistema ou app para o setor',
+  'Já uso um sistema, mas ele não atende minha operação',
+  'Quero trocar planilhas e papel por um sistema próprio',
+  'Preciso de um site que gere clientes',
 ];
 
 const BUDGET_RANGES = [
@@ -125,7 +125,7 @@ export const LeadQualifierForm: React.FC<LeadQualifierFormProps> = ({ preselecte
                     <span>DIAGNÓSTICO TÉCNICO & PROPOSTA</span>
                   </div>
                   <h2 className="font-display text-2xl sm:text-4xl font-bold text-white">
-                    Vamos arquitetar o seu próximo projeto?
+                    Vamos digitalizar sua construtora, imobiliária ou escritório?
                   </h2>
                   <p className="text-sm text-vks-white/70 mt-1.5">
                     Configure o escopo em 3 passos rápidos. Você recebe o{' '}
@@ -162,10 +162,10 @@ export const LeadQualifierForm: React.FC<LeadQualifierFormProps> = ({ preselecte
                   <div className="space-y-6 animate-fadeIn">
                     <div>
                       <label className="block font-display text-lg font-semibold text-white mb-1">
-                        1. Qual frente tecnológica sua empresa precisa agora?
+                        1. Qual é o segmento da sua empresa?
                       </label>
                       <p className="text-xs text-vks-white/60 mb-4">
-                        Selecione a solução principal para direcionarmos o arquiteto especialista.
+                        Assim já chegamos na conversa conhecendo os processos do seu negócio.
                       </p>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -282,7 +282,7 @@ export const LeadQualifierForm: React.FC<LeadQualifierFormProps> = ({ preselecte
                         onChange={(e) =>
                           setFormData({ ...formData, projectDetails: e.target.value })
                         }
-                        placeholder="Ex: Precisamos de um SaaS para gestão financeira com app em Flutter e integração via API/Webhooks..."
+                        placeholder="Ex: Controlamos 4 obras em planilhas e queremos um sistema de medições com app para os mestres de obra..."
                         className="w-full rounded-2xl bg-vks-black/80 border border-vks-white/15 focus:border-vks-primary focus:outline-none p-4 text-sm text-white placeholder:text-vks-white/40"
                       />
                     </div>
@@ -382,7 +382,7 @@ export const LeadQualifierForm: React.FC<LeadQualifierFormProps> = ({ preselecte
                             onChange={(e) =>
                               setFormData({ ...formData, company: e.target.value })
                             }
-                            placeholder="Nome da sua empresa ou startup"
+                            placeholder="Construtora, imobiliária ou escritório"
                             className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-vks-black/80 border border-vks-white/15 focus:border-vks-primary focus:outline-none text-sm text-white"
                           />
                         </div>

@@ -2,7 +2,8 @@ import React from 'react';
 import {
   ArrowUpRight,
   Compass,
-  Cpu,
+  ExternalLink,
+  ClipboardCheck,
   GitBranch,
   Rocket,
   TrendingUp,
@@ -11,40 +12,34 @@ import {
 export const ProcessAndCasesSection: React.FC = () => {
   const cases = [
     {
-      category: 'SAAS & ERP LOGÍSTICO',
-      title: 'Plataforma Multi-Tenant de Gestão & Faturamento em Tempo Real',
-      impact: '+310% em capacidade operacional',
-      metrics: [
-        { label: 'Latência média de API', value: '< 42ms' },
-        { label: 'Redução de retrabalho', value: '78%' },
-      ],
-      stack: ['Laravel', 'Vue.js', 'PostgreSQL', 'Redis Queues'],
+      category: 'SAAS IMOBILIÁRIO',
+      client: 'Avalui',
+      url: 'https://avalui.com.br',
+      urlLabel: 'avalui.com.br',
+      title: 'Plataforma de Avaliações Imobiliárias e Emissão de PTAM',
       summary:
-        'Unificação de 6 sistemas fragmentados em um único SaaS com emissão fiscal automatizada, conciliação bancária via webhook e painel gerencial ao vivo.',
+        'SaaS que automatiza todo o ciclo de avaliações imobiliárias e vistorias: coleta de dados do imóvel, cálculo pelo Método Comparativo Direto, prévia protegida e liberação do laudo em PDF após a confirmação automática do pagamento.',
+      highlights: [
+        'Laudos em conformidade com a ABNT NBR 14653-2',
+        'Cobrança integrada: laudo liberado só após o pagamento',
+        'Painel administrativo de solicitações e clientes',
+      ],
+      stack: ['Laravel', 'Vue.js', 'PDF Engine', 'API Bancária'],
     },
     {
-      category: 'APP MOBILE CROSS-PLATFORM',
-      title: 'Super App B2B/B2C com Operação Offline-First & Pix Instantâneo',
-      impact: '4.9★ nas lojas e +85k usuários ativos',
-      metrics: [
-        { label: 'Framerate constante', value: '60 FPS' },
-        { label: 'Conversão no checkout', value: '+44%' },
-      ],
-      stack: ['Flutter', 'FastAPI', 'WebSockets', 'Push Engine'],
+      category: 'ENGENHARIA & ENERGIA SOLAR',
+      client: 'Luminar Solar',
+      url: 'https://v0-luminar-solar.vercel.app',
+      urlLabel: 'Luminar Solar Engenharia e Arquitetura',
+      title: 'Site Institucional para Escritório de Engenharia Solar',
       summary:
-        'Aplicativo iOS e Android com sincronização inteligente em áreas sem sinal, carteira digital integrada e notificações em tempo real.',
-    },
-    {
-      category: 'IA & HIPERAUTOMAÇÃO',
-      title: 'Ecossistema de Agentes de IA & Orquestração de Filas de Atendimento',
-      impact: 'Atendimento 24/7 com 82% de resolução autônoma',
-      metrics: [
-        { label: 'Tempo de 1ª resposta', value: '1.8 seg' },
-        { label: 'ROI atingido em', value: '45 dias' },
+        'Site da Luminar Solar Engenharia e Arquitetura, especializada em projetos e instalação de energia solar no litoral do Piauí. Apresenta serviços, portfólio de obras e depoimentos, com foco em transformar visitantes em pedidos de orçamento.',
+      highlights: [
+        'Portfólio de projetos executados e depoimentos de clientes',
+        'Layout responsivo, rápido e com tema claro/escuro',
+        'Estrutura pronta para blog, leads e WhatsApp',
       ],
-      stack: ['Python', 'FastAPI', 'LLM / RAG', 'WhatsApp API'],
-      summary:
-        'Pipeline assíncrono que qualifica leads automaticamente, consulta estoque/ERP em tempo real, gera propostas e transfere apenas leads prontos para o time comercial.',
+      stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     },
   ];
 
@@ -52,26 +47,26 @@ export const ProcessAndCasesSection: React.FC = () => {
     {
       num: '01',
       icon: Compass,
-      title: 'Discovery & Arquitetura',
-      desc: 'Mapeamos gargalos operacionais, regras de negócio, requisitos de escala e definimos a arquitetura ideal com prototipação de alta fidelidade.',
+      title: 'Diagnóstico da Operação',
+      desc: 'Visitamos sua rotina: obra, escritório ou imobiliária. Mapeamos planilhas, normas e gargalos e entregamos um protótipo navegável.',
     },
     {
       num: '02',
       icon: GitBranch,
-      title: 'Sprints Ágeis & Clean Code',
-      desc: 'Ciclos semanais com entregas visíveis em ambiente de homologação. Você acompanha a evolução em tempo real, sem caixas-pretas.',
+      title: 'Desenvolvimento em Etapas',
+      desc: 'Entregas semanais em ambiente de teste. Você e sua equipe validam cada tela antes de ela entrar em uso.',
     },
     {
       num: '03',
-      icon: Cpu,
-      title: 'QA, Stress Test & Segurança',
-      desc: 'Testes automatizados, validação de carga em filas/banco de dados, blindagem de endpoints e conformidade total com a LGPD.',
+      icon: ClipboardCheck,
+      title: 'Testes, Normas & Segurança',
+      desc: 'Conferimos cálculos e documentos com as normas aplicáveis, testamos o sistema e protegemos os dados conforme a LGPD.',
     },
     {
       num: '04',
       icon: Rocket,
-      title: 'Deploy Contínuo & Escala',
-      desc: 'Infraestrutura containerizada, monitoramento ativo 24/7, zero-downtime deploy e acompanhamento próximo pós-lançamento.',
+      title: 'Implantação & Suporte',
+      desc: 'Colocamos no ar, treinamos sua equipe e seguimos ao lado com suporte e melhorias contínuas.',
     },
   ];
 
@@ -84,26 +79,26 @@ export const ProcessAndCasesSection: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vks-primary/15 border border-vks-primary/40 text-xs font-mono text-vks-primaryGlow mb-4">
                 <TrendingUp className="w-3.5 h-3.5" />
-                <span>RESULTADOS EM PRODUÇÃO</span>
+                <span>CLIENTES EM PRODUÇÃO</span>
               </div>
               <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
-                Engenharia que se paga em{' '}
-                <span className="text-gradient-vks">performance e ROI</span>
+                Quem já constrói{' '}
+                <span className="text-gradient-vks">com a VKS Soft</span>
               </h2>
             </div>
             <a
               href="#diagnostico"
               className="inline-flex items-center gap-2 text-sm font-semibold text-vks-primaryGlow hover:text-white transition-colors"
             >
-              <span>Quero um resultado similar na minha empresa</span>
+              <span>Quero um projeto assim para minha empresa</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            {cases.map((item, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            {cases.map((item) => (
               <div
-                key={index}
+                key={item.client}
                 className="glass-card rounded-3xl p-7 flex flex-col justify-between border border-vks-white/10 hover:border-vks-primary/50"
               >
                 <div>
@@ -112,10 +107,11 @@ export const ProcessAndCasesSection: React.FC = () => {
                       {item.category}
                     </span>
                     <span className="font-mono text-xs text-emerald-400 font-semibold">
-                      {item.impact}
+                      ● No ar
                     </span>
                   </div>
 
+                  <p className="font-display text-sm font-semibold text-vks-primaryGlow mb-1">{item.client}</p>
                   <h3 className="font-display text-xl font-bold text-white mb-3 leading-snug">
                     {item.title}
                   </h3>
@@ -125,18 +121,18 @@ export const ProcessAndCasesSection: React.FC = () => {
                 </div>
 
                 <div>
-                  {/* Métricas Lado a Lado */}
-                  <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-vks-black/75 border border-vks-white/10 mb-5">
-                    {item.metrics.map((m, i) => (
-                      <div key={i}>
-                        <p className="font-display text-xl font-bold text-white">{m.value}</p>
-                        <p className="text-[11px] text-vks-white/60">{m.label}</p>
-                      </div>
+                  {/* Destaques */}
+                  <ul className="space-y-2 p-4 rounded-2xl bg-vks-black/75 border border-vks-white/10 mb-5">
+                    {item.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-xs sm:text-sm text-vks-white/85">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-vks-primaryGlow shrink-0" />
+                        <span>{h}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
 
                   {/* Stack */}
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1.5 mb-6">
                     {item.stack.map((tech) => (
                       <span
                         key={tech}
@@ -146,6 +142,17 @@ export const ProcessAndCasesSection: React.FC = () => {
                       </span>
                     ))}
                   </div>
+
+                  {/* Link para o projeto */}
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-between bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-white transition-all duration-300"
+                  >
+                    <span>Visitar {item.urlLabel}</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
             ))}
@@ -156,13 +163,13 @@ export const ProcessAndCasesSection: React.FC = () => {
         <div id="processo">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-mono text-xs uppercase tracking-widest text-vks-primaryGlow">
-              METODOLOGIA DE EXECUÇÃO VKS
+              COMO TRABALHAMOS
             </span>
             <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">
-              Do diagnóstico ao deploy em <span className="text-gradient-vks">4 etapas claras</span>
+              Da planilha ao sistema em <span className="text-gradient-vks">4 etapas claras</span>
             </h2>
             <p className="text-vks-white/70 text-sm sm:text-base mt-4">
-              Transparência total em código, prazos e arquitetura para que você tenha previsibilidade do início ao fim.
+              Transparência em prazos, custos e entregas, com o mesmo cuidado de um cronograma de obra bem executado.
             </p>
           </div>
 

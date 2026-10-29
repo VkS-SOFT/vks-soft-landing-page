@@ -15,9 +15,9 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Soluções', href: '#solucoes' },
-    { label: 'Engenharia & Stack', href: '#arquitetura' },
-    { label: 'Cases & Impacto', href: '#cases' },
+    { label: 'Segmentos', href: '#solucoes' },
+    { label: 'Por que a VKS', href: '#diferencial' },
+    { label: 'Clientes', href: '#cases' },
     { label: 'Processo', href: '#processo' },
   ];
 

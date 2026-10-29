@@ -11,16 +11,16 @@ export const Footer: React.FC = () => {
           <div className="md:col-span-5 space-y-4">
             <VksLogo className="h-12" showSubtitle={true} variant="dark" />
             <p className="text-sm text-vks-white/70 max-w-sm leading-relaxed pt-2">
-              Engenharia de software sob medida, aplicativos mobile cross-platform e automações inteligentes de alta performance para empresas que buscam escala real.
+              Software especialista em construção civil e mercado imobiliário: sistemas, apps e sites para construtoras, imobiliárias e escritórios de engenharia e arquitetura.
             </p>
             <div className="flex items-center gap-4 pt-2 text-xs font-mono text-vks-white/60">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-vks-primaryGlow" />
-                Clean Architecture
+                ConTech & PropTech
               </span>
               <span className="flex items-center gap-1.5">
                 <Code2 className="w-4 h-4 text-vks-primaryGlow" />
-                High-Availability
+                Formação em Edificações
               </span>
             </div>
           </div>
@@ -28,27 +28,27 @@ export const Footer: React.FC = () => {
           {/* Soluções */}
           <div className="md:col-span-4 space-y-3">
             <h4 className="font-mono text-xs uppercase tracking-wider text-vks-primaryGlow font-semibold">
-              Frentes de Atuação
+              Segmentos Atendidos
             </h4>
             <ul className="space-y-2.5 text-sm text-vks-white/75">
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Desenvolvimento Web, SaaS & ERPs
+                  Construtoras & Incorporadoras
                 </a>
               </li>
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Aplicativos Mobile (Flutter / iOS & Android)
+                  Imobiliárias & Avaliação de Imóveis
                 </a>
               </li>
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Automações, Agentes de IA & Filas Assíncronas
+                  Escritórios de Engenharia & Arquitetura
                 </a>
               </li>
               <li>
-                <a href="#arquitetura" className="hover:text-white transition-colors">
-                  Consultoria de Arquitetura & Refatoração
+                <a href="#cases" className="hover:text-white transition-colors">
+                  Clientes: Avalui & Luminar Solar
                 </a>
               </li>
             </ul>

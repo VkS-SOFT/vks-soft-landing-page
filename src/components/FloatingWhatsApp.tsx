@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react';
 export const FloatingWhatsApp: React.FC = () => {
   const whatsappNumber = import.meta.env.VITE_VKS_WHATSAPP || '5586995615930';
   const defaultMsg = encodeURIComponent(
-    'Olá! Vim pela Landing Page da VKS Soft e gostaria de conversar sobre um projeto de software/automação.'
+    'Olá! Vim pela Landing Page da VKS Soft e gostaria de conversar sobre um software para minha empresa do setor de construção/imobiliário.'
   );
 
   return (
