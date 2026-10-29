@@ -514,6 +514,20 @@ const BackgroundCodeParticles: React.FC<{
   );
 };
 
+// Sem WebGL (GPU desativada, navegador antigo) o Canvas lança erro no mount;
+// isolamos a falha para que só a cena 3D suma, sem derrubar a página inteira.
+class SceneErrorBoundary extends React.Component<{ children: React.ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
 export const VksCoreScene: React.FC<SceneProps> = ({
   scrollProgress,
   mousePos,
@@ -532,25 +546,27 @@ export const VksCoreScene: React.FC<SceneProps> = ({
         }}
       />
 
-      <Canvas
-        camera={{ position: [0, 0.1, 7.2], fov: 40 }}
-        dpr={[1, 1.75]}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      >
-        <ambientLight intensity={0.85} />
-        <directionalLight position={[5, 8, 6]} intensity={2.4} color="#E2E2E2" />
-        <pointLight position={[-4, 2, 4]} intensity={3.2} color="#501BED" distance={15} />
-        <pointLight position={[3, 3, 2]} intensity={2.2} color="#8E65FF" distance={12} />
+      <SceneErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0.1, 7.2], fov: 40 }}
+          dpr={[1, 1.75]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        >
+          <ambientLight intensity={0.85} />
+          <directionalLight position={[5, 8, 6]} intensity={2.4} color="#E2E2E2" />
+          <pointLight position={[-4, 2, 4]} intensity={3.2} color="#501BED" distance={15} />
+          <pointLight position={[3, 3, 2]} intensity={2.2} color="#8E65FF" distance={12} />
 
-        <Environment preset="city" />
+          <Environment preset="city" />
 
-        <BackgroundCodeParticles scrollProgress={scrollProgress} mousePos={mousePos} />
-        <VksDeveloperLaptop3D
-          scrollProgress={scrollProgress}
-          mousePos={mousePos}
-          activeServiceIndex={activeServiceIndex}
-        />
-      </Canvas>
+          <BackgroundCodeParticles scrollProgress={scrollProgress} mousePos={mousePos} />
+          <VksDeveloperLaptop3D
+            scrollProgress={scrollProgress}
+            mousePos={mousePos}
+            activeServiceIndex={activeServiceIndex}
+          />
+        </Canvas>
+      </SceneErrorBoundary>
     </div>
   );
 };
