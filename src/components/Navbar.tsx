@@ -1,10 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { VksLogo } from './VksLogo';
-import { ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Menu, Moon, Sparkles, Sun, X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() =>
+    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'
+  );
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    if (next === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    try {
+      localStorage.setItem('vks-theme', next);
+    } catch {
+      // Sem storage (aba anônima/bloqueada): o tema vale só nesta visita.
+    }
+  };
+
+  const themeButton = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="p-2.5 rounded-xl glass-panel text-vks-white hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-vks-primary"
+      aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+      title={theme === 'dark' ? 'Tema claro' : 'Tema escuro'}
+    >
+      {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+    </button>
+  );
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,7 +66,7 @@ export const Navbar: React.FC = () => {
           className="flex items-center gap-3 focus:outline-none group"
           aria-label="VKS Soft Home"
         >
-          <VksLogo className="h-11 sm:h-12" showSubtitle={true} variant="dark" />
+          <VksLogo className="h-11 sm:h-12" showSubtitle={true} />
         </a>
 
         {/* Desktop Nav */}
@@ -54,9 +84,10 @@ export const Navbar: React.FC = () => {
 
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-3">
+          {themeButton}
           <a
             href="#diagnostico"
-            className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-vks-primary hover:bg-vks-primaryGlow text-white font-semibold text-sm shadow-vks-glow hover:shadow-vks-glow-lg transition-all duration-300 group overflow-hidden"
+            className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-vks-primary hover:bg-vks-primaryGlow text-vks-onPrimary font-semibold text-sm shadow-vks-glow hover:shadow-vks-glow-lg transition-all duration-300 group overflow-hidden"
           >
             <Sparkles className="w-4 h-4 text-vks-white/90" />
             <span>Iniciar Projeto</span>
@@ -64,15 +95,18 @@ export const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Trigger */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2.5 rounded-xl glass-panel text-vks-white hover:text-white focus:outline-none"
-          aria-label="Abrir menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile: tema + menu */}
+        <div className="md:hidden flex items-center gap-2">
+          {themeButton}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2.5 rounded-xl glass-panel text-vks-white hover:text-white focus:outline-none"
+            aria-label="Abrir menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Dropdown */}
@@ -92,7 +126,7 @@ export const Navbar: React.FC = () => {
             <a
               href="#diagnostico"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-vks-primary text-white font-semibold text-sm shadow-vks-glow"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-vks-primary text-vks-onPrimary font-semibold text-sm shadow-vks-glow"
             >
               <Sparkles className="w-4 h-4" />
               <span>Solicitar Proposta Técnica</span>

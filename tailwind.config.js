@@ -6,16 +6,21 @@ export default {
   ],
   theme: {
     extend: {
+      // Cores que mudam com o tema vêm de variáveis CSS (ver src/index.css).
+      // vks.white = texto, vks.black = fundo; `white` = texto de maior contraste.
       colors: {
+        white: 'rgb(var(--vks-strong) / <alpha-value>)',
         vks: {
           primary: '#501BED',
-          primaryGlow: '#7344FF',
+          primaryGlow: 'rgb(var(--vks-primary-glow) / <alpha-value>)',
           primaryDark: '#360EB5',
-          white: '#E2E2E2',
-          black: '#1B1A1F',
-          surface: '#232129',
-          surfaceLight: '#2D2A36',
-          darkest: '#111014',
+          onPrimary: '#FFFFFF',
+          white: 'rgb(var(--vks-fg) / <alpha-value>)',
+          black: 'rgb(var(--vks-bg) / <alpha-value>)',
+          surface: 'rgb(var(--vks-surface) / <alpha-value>)',
+          surfaceLight: 'rgb(var(--vks-surface-light) / <alpha-value>)',
+          darkest: 'rgb(var(--vks-darkest) / <alpha-value>)',
+          success: 'rgb(var(--vks-success) / <alpha-value>)',
         }
       },
       fontFamily: {

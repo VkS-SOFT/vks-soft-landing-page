@@ -4,12 +4,12 @@ import { ArrowUpRight, Code2, Mail, MapPin, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative z-10 border-t border-vks-white/10 bg-[#141318]/90 backdrop-blur-xl pt-16 pb-12">
+    <footer className="relative z-10 border-t border-vks-white/10 bg-vks-darkest/90 backdrop-blur-xl pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-vks-white/10">
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <VksLogo className="h-12" showSubtitle={true} variant="dark" />
+            <VksLogo className="h-12" showSubtitle={true} />
             <p className="text-sm text-vks-white/70 max-w-sm leading-relaxed pt-2">
               Software especialista em construção civil e mercado imobiliário: sistemas, apps e sites para construtoras, imobiliárias e escritórios de engenharia e arquitetura.
             </p>
@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
             <div className="pt-3">
               <a
                 href="#diagnostico"
-                className="inline-flex items-center gap-2 text-xs font-mono text-white bg-vks-primary/25 hover:bg-vks-primary border border-vks-primary/50 px-4 py-2.5 rounded-xl transition-all"
+                className="inline-flex items-center gap-2 text-xs font-mono text-white hover:text-vks-onPrimary bg-vks-primary/25 hover:bg-vks-primary border border-vks-primary/50 px-4 py-2.5 rounded-xl transition-all"
               >
                 <span>Solicitar Proposta Técnica</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />

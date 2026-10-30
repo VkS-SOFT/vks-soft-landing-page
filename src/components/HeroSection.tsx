@@ -77,7 +77,7 @@ export const HeroSection: React.FC = () => {
             <div className="hero-reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <a
                 href="#diagnostico"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-vks-primary hover:bg-vks-primaryGlow text-white font-semibold text-base shadow-vks-glow hover:shadow-vks-glow-lg transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-vks-primary hover:bg-vks-primaryGlow text-vks-onPrimary font-semibold text-base shadow-vks-glow hover:shadow-vks-glow-lg transition-all duration-300 group"
               >
                 <span>Quero digitalizar minha operação</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -121,7 +121,7 @@ export const HeroSection: React.FC = () => {
                     &lt;/&gt; vks://construcao-imobiliario
                   </span>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-vks-success border border-emerald-500/30">
                   SEGMENTOS
                 </span>
               </div>

@@ -3,6 +3,7 @@ import React from 'react';
 interface VksLogoProps {
   className?: string;
   showSubtitle?: boolean;
+  /** Força a versão para fundo escuro/claro; sem ela, o "SOFT" acompanha o tema da página. */
   variant?: 'dark' | 'light';
 }
 
@@ -13,9 +14,10 @@ interface VksLogoProps {
 export const VksLogo: React.FC<VksLogoProps> = ({
   className = 'h-10',
   showSubtitle = true,
-  variant = 'dark',
+  variant,
 }) => {
-  const subtitleColor = variant === 'dark' ? '#E2E2E2' : '#1B1A1F';
+  const subtitleColor =
+    variant === 'dark' ? '#E2E2E2' : variant === 'light' ? '#1B1A1F' : 'var(--vks-logo-soft)';
 
   return (
     <div className={`inline-flex items-center select-none group ${className}`}>

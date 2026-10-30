@@ -137,7 +137,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <div
                       className={`p-3 rounded-2xl transition-colors duration-300 ${
                         isActive
-                          ? 'bg-vks-primary text-white shadow-vks-glow'
+                          ? 'bg-vks-primary text-vks-onPrimary shadow-vks-glow'
                           : 'bg-vks-surfaceLight text-vks-white group-hover:bg-vks-primary/30'
                       }`}
                     >
@@ -189,8 +189,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     }}
                     className={`w-full py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-between transition-all duration-300 ${
                       isActive
-                        ? 'bg-vks-primary text-white shadow-vks-glow hover:bg-vks-primaryGlow'
-                        : 'bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-white'
+                        ? 'bg-vks-primary text-vks-onPrimary shadow-vks-glow hover:bg-vks-primaryGlow'
+                        : 'bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-vks-onPrimary'
                     }`}
                   >
                     <span>Orçar esta solução</span>

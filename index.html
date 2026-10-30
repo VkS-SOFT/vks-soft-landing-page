@@ -10,7 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-vks-black text-vks-white antialiased selection:bg-vks-primary selection:text-white overflow-x-hidden">
+  <body class="bg-vks-black text-vks-white antialiased selection:bg-vks-primary selection:text-vks-onPrimary overflow-x-hidden">
+    <script>
+      // Aplica o tema salvo antes do React montar, evitando piscar o tema errado.
+      try {
+        if (localStorage.getItem('vks-theme') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+        }
+      } catch (e) {}
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

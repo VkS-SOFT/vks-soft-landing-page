@@ -134,7 +134,7 @@ export const ProcessAndCasesSection: React.FC = () => {
                     <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-vks-primary/20 text-vks-primaryGlow border border-vks-primary/30">
                       {item.category}
                     </span>
-                    <span className="font-mono text-xs text-emerald-400 font-semibold">
+                    <span className="font-mono text-xs text-vks-success font-semibold">
                       ● No ar
                     </span>
                   </div>
@@ -176,7 +176,7 @@ export const ProcessAndCasesSection: React.FC = () => {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-between bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-white transition-all duration-300"
+                    className="w-full py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-between bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-vks-onPrimary transition-all duration-300"
                   >
                     <span>Visitar {item.urlLabel}</span>
                     <ExternalLink className="w-4 h-4" />
@@ -210,7 +210,7 @@ export const ProcessAndCasesSection: React.FC = () => {
                   className="glass-card rounded-3xl p-7 relative overflow-hidden group"
                 >
                   <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 rounded-2xl bg-vks-primary/20 text-vks-primaryGlow group-hover:bg-vks-primary group-hover:text-white transition-colors">
+                    <div className="p-3 rounded-2xl bg-vks-primary/20 text-vks-primaryGlow group-hover:bg-vks-primary group-hover:text-vks-onPrimary transition-colors">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="font-display text-3xl font-bold text-vks-white/15 group-hover:text-vks-primary/40 transition-colors">
