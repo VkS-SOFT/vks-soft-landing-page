@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import {
   Float,
   Environment,
@@ -297,16 +297,21 @@ const BlueprintBuilding3D: React.FC<{
 
 /**
  * Notebook 3D Ultra-Clean (DevBook Pro VKS) + Holograma do prédio em construção
- * Responsivo aos limites reais do viewport para nunca cortar nas bordas da tela
+ * Posicionado e dimensionado pelo slot #hero-3d-slot do HeroSection
  */
+const LAPTOP_Z = -0.4;
+// Caixa aproximada do modelo (notebook + prédio + grua) em unidades locais, usada para caber no slot
+const MODEL_WIDTH = 3.3;
+const MODEL_HEIGHT = 3.0;
+const MODEL_CENTER_Y = 0.8;
+const slotDepth = new THREE.Vector3(0, 0, LAPTOP_Z);
+
 const VksDeveloperLaptop3D: React.FC<{
-  scrollProgress: number;
   mousePos: { x: number; y: number };
   activeServiceIndex: number;
-}> = ({ scrollProgress, mousePos, activeServiceIndex }) => {
+}> = ({ mousePos, activeServiceIndex }) => {
   const laptopGroupRef = useRef<THREE.Group>(null);
   const screenTexture = useCodeScreenTexture();
-  const { viewport } = useThree();
 
   // Posição das teclas mecânicas retroiluminadas no chassi
   const keyPositions = useMemo(() => {
@@ -323,72 +328,38 @@ const VksDeveloperLaptop3D: React.FC<{
     return keys;
   }, []);
 
-  // Escala dinâmica baseada na largura da tela (+1% de escala conforme solicitado)
-  const isMobile = viewport.width < 6.2;
-  const responsiveScale = isMobile
-    ? Math.min(viewport.width * 0.1414, 0.5656)
-    : Math.min(viewport.width * 0.08686, 0.7575);
+  useFrame((state, delta) => {
+    const group = laptopGroupRef.current;
+    if (!group) return;
 
-  useFrame((_, delta) => {
-    if (!laptopGroupRef.current) return;
+    // O notebook ocupa o espaço reservado no hero (#hero-3d-slot) e rola junto com a página,
+    // então nunca fica por trás dos títulos das outras seções.
+    const rect = document.getElementById('hero-3d-slot')?.getBoundingClientRect();
+    const onScreen = !!rect && rect.width > 0 && rect.bottom > 0 && rect.top < state.size.height;
+    group.visible = onScreen;
+    if (!rect || !onScreen) return;
 
-    // Alinha exatamente na coluna da direita (afastado do título à esquerda) e mais abaixo
-    const heroOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.275, 2.38);
-    const sectionOffsetX = isMobile ? 0 : Math.min(viewport.width * 0.25, 2.15);
-
-    const targetX =
-      scrollProgress < 0.28
-        ? heroOffsetX
-        : scrollProgress < 0.68
-        ? -sectionOffsetX
-        : heroOffsetX * 0.85;
-
-    const targetY = isMobile ? 0.35 : scrollProgress < 0.28 ? -0.18 : -0.25;
-    const targetZ = -0.4;
-
-    laptopGroupRef.current.position.x = THREE.MathUtils.lerp(
-      laptopGroupRef.current.position.x,
-      targetX,
-      delta * 4
+    const pxToWorld = state.viewport.getCurrentViewport(state.camera, slotDepth).width / state.size.width;
+    const scale = Math.min(
+      (rect.width * pxToWorld) / MODEL_WIDTH,
+      (rect.height * pxToWorld) / MODEL_HEIGHT
     );
-    laptopGroupRef.current.position.y = THREE.MathUtils.lerp(
-      laptopGroupRef.current.position.y,
-      targetY,
-      delta * 4
-    );
-    laptopGroupRef.current.position.z = THREE.MathUtils.lerp(
-      laptopGroupRef.current.position.z,
-      targetZ,
-      delta * 4
-    );
+    const centerX = (rect.left + rect.width / 2 - state.size.width / 2) * pxToWorld;
+    const centerY = (state.size.height / 2 - (rect.top + rect.height / 2)) * pxToWorld;
 
-    // Rotação suave seguindo o mouse + scroll (sem girar demais para não sair do quadro)
-    const baseRotY = scrollProgress < 0.28 ? -0.38 : scrollProgress < 0.68 ? 0.38 : -0.25;
-    const targetRotY = baseRotY + mousePos.x * 0.22;
-    const targetRotX = 0.2 - mousePos.y * 0.12;
+    group.scale.setScalar(scale);
+    group.position.set(centerX, centerY - MODEL_CENTER_Y * scale, LAPTOP_Z);
 
-    laptopGroupRef.current.rotation.y = THREE.MathUtils.lerp(
-      laptopGroupRef.current.rotation.y,
-      targetRotY,
-      delta * 4
-    );
-    laptopGroupRef.current.rotation.x = THREE.MathUtils.lerp(
-      laptopGroupRef.current.rotation.x,
-      targetRotX,
-      delta * 4
-    );
+    // Rotação suave seguindo o mouse (sem girar demais para não sair do slot)
+    group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, -0.38 + mousePos.x * 0.22, delta * 4);
+    group.rotation.x = THREE.MathUtils.lerp(group.rotation.x, 0.2 - mousePos.y * 0.12, delta * 4);
   });
 
   const accentColor =
     activeServiceIndex === 1 ? '#8F6BFF' : activeServiceIndex === 2 ? '#27C93F' : '#501BED';
 
   return (
-    <group
-      ref={laptopGroupRef}
-      position={[2.32, -0.18, -0.4]}
-      rotation={[0.2, -0.38, 0]}
-      scale={responsiveScale}
-    >
+    <group ref={laptopGroupRef} rotation={[0.2, -0.38, 0]} visible={false}>
       <Float speed={1.8} rotationIntensity={0.12} floatIntensity={0.3}>
         {/* Prédio holográfico em construção flutuando logo acima da tela */}
         <BlueprintBuilding3D position={[-0.35, 1.12, 0.25]} scale={0.62} accentColor={accentColor} />
@@ -590,7 +561,6 @@ export const VksCoreScene: React.FC<SceneProps> = ({
 
           <BackgroundCodeParticles scrollProgress={scrollProgress} mousePos={mousePos} />
           <VksDeveloperLaptop3D
-            scrollProgress={scrollProgress}
             mousePos={mousePos}
             activeServiceIndex={activeServiceIndex}
           />
