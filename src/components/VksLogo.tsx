@@ -26,7 +26,15 @@ export const VksLogo: React.FC<VksLogoProps> = ({
         className="h-full w-auto overflow-visible"
       >
         <defs>
-          <linearGradient id="vksPrimaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          {/* userSpaceOnUse: com objectBoundingBox a haste reta do K (largura 0) ficava sem pintura */}
+          <linearGradient
+            id="vksPrimaryGrad"
+            gradientUnits="userSpaceOnUse"
+            x1="0"
+            y1="0"
+            x2="540"
+            y2="175"
+          >
             <stop offset="0%" stopColor="#6230F5" />
             <stop offset="50%" stopColor="#501BED" />
             <stop offset="100%" stopColor="#3E11C4" />
