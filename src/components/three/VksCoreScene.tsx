@@ -7,6 +7,7 @@ import {
   PointMaterial,
   Points,
   ContactShadows,
+  Edges,
 } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -54,7 +55,7 @@ function useCodeScreenTexture() {
     ctx.fillRect(130, 8, 280, 3);
     ctx.font = 'bold 18px monospace';
     ctx.fillStyle = '#E2E2E2';
-    ctx.fillText('VksArchitecture.ts', 160, 37);
+    ctx.fillText('GestaoDeObra.ts', 160, 37);
 
     // Sidebar esquerda
     ctx.fillStyle = '#17161C';
@@ -77,47 +78,49 @@ function useCodeScreenTexture() {
     const codeLines: Array<Array<{ text: string; color: string }>> = [
       [
         { text: 'import ', color: '#9B7BFF' },
-        { text: '{ VksCluster, AIWorker, FlutterBridge } ', color: '#E2E2E2' },
+        { text: '{ Obra, Orcamento, Laudo } ', color: '#E2E2E2' },
         { text: 'from ', color: '#9B7BFF' },
-        { text: "'@vks-soft/core'", color: '#27C93F' },
+        { text: "'@vks-soft/construcao'", color: '#27C93F' },
       ],
       [],
       [
         { text: 'export class ', color: '#9B7BFF' },
-        { text: 'EnterpriseEngine ', color: '#501BED' },
+        { text: 'GestaoDeObra ', color: '#501BED' },
         { text: 'implements ', color: '#9B7BFF' },
-        { text: 'HighAvailability {', color: '#E2E2E2' },
+        { text: 'CronogramaFisicoFinanceiro {', color: '#E2E2E2' },
       ],
       [
         { text: '  private readonly ', color: '#9B7BFF' },
-        { text: 'slaTarget = ', color: '#E2E2E2' },
-        { text: '99.98', color: '#FFBD2E' },
+        { text: 'norma = ', color: '#E2E2E2' },
+        { text: "'NBR 14653'", color: '#FFBD2E' },
         { text: ';', color: '#E2E2E2' },
       ],
       [],
       [
         { text: '  public async ', color: '#9B7BFF' },
-        { text: 'deployEcosystem', color: '#7344FF' },
-        { text: '(tenant: ', color: '#E2E2E2' },
-        { text: 'ClientConfig', color: '#27C93F' },
+        { text: 'executarEtapa', color: '#7344FF' },
+        { text: '(obra: ', color: '#E2E2E2' },
+        { text: 'Obra', color: '#27C93F' },
         { text: ') {', color: '#E2E2E2' },
       ],
       [
         { text: '    await ', color: '#9B7BFF' },
-        { text: 'VksCluster.scaleWebSaaS({ multiTenant: ', color: '#E2E2E2' },
-        { text: 'true', color: '#FFBD2E' },
+        { text: 'Orcamento.calcular({ bdi: ', color: '#E2E2E2' },
+        { text: '0.25', color: '#FFBD2E' },
+        { text: ', base: ', color: '#E2E2E2' },
+        { text: "'SINAPI'", color: '#27C93F' },
         { text: ' });', color: '#E2E2E2' },
       ],
       [
         { text: '    await ', color: '#9B7BFF' },
-        { text: 'FlutterBridge.compileNative({ fps: ', color: '#E2E2E2' },
-        { text: '120', color: '#FFBD2E' },
+        { text: 'obra.registrarDiario({ fotos: ', color: '#E2E2E2' },
+        { text: 'true', color: '#FFBD2E' },
         { text: ' });', color: '#E2E2E2' },
       ],
       [
         { text: '    return ', color: '#9B7BFF' },
-        { text: 'AIWorker.dispatchQueue(', color: '#E2E2E2' },
-        { text: "'lead-automation'", color: '#27C93F' },
+        { text: 'Laudo.emitirPDF(', color: '#E2E2E2' },
+        { text: "'medicao-mensal'", color: '#27C93F' },
         { text: ');', color: '#E2E2E2' },
       ],
       [{ text: '  }', color: '#E2E2E2' }],
@@ -144,10 +147,10 @@ function useCodeScreenTexture() {
 
     ctx.font = 'bold 20px monospace';
     ctx.fillStyle = '#27C93F';
-    ctx.fillText('➜  vks-soft-production ✓ Build & Deploy Ready (42ms)', 175, 525);
+    ctx.fillText('➜  obra-residencial ✓ Etapa 6/6 concluída • Medição aprovada', 175, 525);
     ctx.fillStyle = '#E2E2E2';
     ctx.font = '18px monospace';
-    ctx.fillText('Active Modules: [Laravel/React SaaS] • [Flutter Mobile] • [FastAPI AI]', 175, 565);
+    ctx.fillText('Módulos: [Gestão de Obras] • [CRM Imobiliário] • [Laudos NBR]', 175, 565);
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.anisotropy = 8;
@@ -156,118 +159,144 @@ function useCodeScreenTexture() {
   }, []);
 }
 
+const FLOOR_COUNT = 6;
+const FLOOR_HEIGHT = 0.22;
+const BUILD_CYCLE = 7; // segundos: sobe os andares, segura pronto e recomeça
+
 /**
- * Símbolo 3D "</>" (Code Brackets + Slash) construído com cápsulas geométricas no estilo da logo VKS
+ * Holograma 3D de um prédio em construção (estilo BIM / wireframe) com grua,
+ * projetado pelo notebook: une desenvolvimento de software e construção civil.
  */
-const CodeSymbol3D: React.FC<{
+const BlueprintBuilding3D: React.FC<{
   position?: [number, number, number];
   scale?: number;
   accentColor: string;
 }> = ({ position = [0, 0, 0], scale = 1, accentColor }) => {
-  const symbolRef = useRef<THREE.Group>(null);
+  const buildingRef = useRef<THREE.Group>(null);
+  const floorRefs = useRef<Array<THREE.Group | null>>([]);
+  const craneJibRef = useRef<THREE.Group>(null);
+  const hookRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
-    if (!symbolRef.current) return;
-    symbolRef.current.position.y =
-      position[1] + Math.sin(state.clock.elapsedTime * 2.2) * 0.08;
-    symbolRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.9) * 0.22;
+    const t = state.clock.elapsedTime;
+    if (buildingRef.current) {
+      buildingRef.current.position.y = position[1] + Math.sin(t * 2.2) * 0.06;
+      buildingRef.current.rotation.y = Math.sin(t * 0.5) * 0.35;
+    }
+
+    // Os andares sobem um a um durante ~70% do ciclo
+    const progress = ((t % BUILD_CYCLE) / BUILD_CYCLE) / 0.7;
+    floorRefs.current.forEach((floor, i) => {
+      if (!floor) return;
+      const p = THREE.MathUtils.clamp(progress * FLOOR_COUNT - i, 0, 1);
+      floor.visible = p > 0;
+      floor.scale.y = Math.max(p, 0.001);
+    });
+
+    if (craneJibRef.current) {
+      craneJibRef.current.rotation.y = Math.sin(t * 0.7) * 0.9;
+    }
+    if (hookRef.current) {
+      hookRef.current.position.x = 0.35 + Math.sin(t * 1.1) * 0.25;
+    }
   });
 
-  const barRadius = 0.085;
-  const barThickness = 0.18;
+  const edgeColor = '#9B7BFF';
 
   return (
-    <group ref={symbolRef} position={position} scale={scale}>
-      {/* Símbolo "<" (Esquerda) */}
-      <group position={[-0.95, 0, 0]}>
-        <RoundedBox
-          args={[barThickness, 0.72, barThickness]}
-          radius={barRadius}
-          smoothness={4}
-          position={[0, 0.21, 0]}
-          rotation={[0, 0, -Math.PI / 4]}
-        >
-          <meshStandardMaterial
-            color="#501BED"
-            emissive="#501BED"
-            emissiveIntensity={0.85}
-            metalness={0.65}
-            roughness={0.2}
-          />
-        </RoundedBox>
-        <RoundedBox
-          args={[barThickness, 0.72, barThickness]}
-          radius={barRadius}
-          smoothness={4}
-          position={[0, -0.21, 0]}
-          rotation={[0, 0, Math.PI / 4]}
-        >
-          <meshStandardMaterial
-            color="#501BED"
-            emissive="#501BED"
-            emissiveIntensity={0.85}
-            metalness={0.65}
-            roughness={0.2}
-          />
-        </RoundedBox>
-      </group>
+    <group ref={buildingRef} position={position} scale={scale}>
+      {/* Terreno / Planta baixa */}
+      <mesh position={[0, -0.03, 0]}>
+        <boxGeometry args={[2.2, 0.04, 1.5]} />
+        <meshBasicMaterial color="#501BED" transparent opacity={0.18} />
+        <Edges color={edgeColor} />
+      </mesh>
+      {[-0.66, -0.22, 0.22, 0.66].map((x) => (
+        <mesh key={`gx${x}`} position={[x, 0, 0]}>
+          <boxGeometry args={[0.006, 0.005, 1.5]} />
+          <meshBasicMaterial color={edgeColor} transparent opacity={0.35} />
+        </mesh>
+      ))}
+      {[-0.375, 0, 0.375].map((z) => (
+        <mesh key={`gz${z}`} position={[0, 0, z]}>
+          <boxGeometry args={[2.2, 0.005, 0.006]} />
+          <meshBasicMaterial color={edgeColor} transparent opacity={0.35} />
+        </mesh>
+      ))}
 
-      {/* Barra "/" (Centro) */}
-      <RoundedBox
-        args={[barThickness, 1.25, barThickness]}
-        radius={barRadius}
-        smoothness={4}
-        position={[0, 0, 0.06]}
-        rotation={[0, 0, -0.38]}
-      >
-        <meshStandardMaterial
-          color="#E2E2E2"
-          emissive={accentColor}
-          emissiveIntensity={0.45}
-          metalness={0.85}
-          roughness={0.15}
-        />
-      </RoundedBox>
+      {/* Andares do prédio: laje + pilares + fachada de vidro */}
+      {Array.from({ length: FLOOR_COUNT }).map((_, i) => (
+        <group
+          key={i}
+          ref={(el) => (floorRefs.current[i] = el)}
+          position={[-0.25, i * FLOOR_HEIGHT, 0]}
+        >
+          <mesh position={[0, FLOOR_HEIGHT - 0.015, 0]}>
+            <boxGeometry args={[1.0, 0.03, 0.8]} />
+            <meshStandardMaterial
+              color="#E2E2E2"
+              emissive={accentColor}
+              emissiveIntensity={0.6}
+              metalness={0.6}
+              roughness={0.25}
+            />
+          </mesh>
+          {[
+            [-0.47, -0.37],
+            [0.47, -0.37],
+            [-0.47, 0.37],
+            [0.47, 0.37],
+          ].map(([x, z]) => (
+            <mesh key={`${x}${z}`} position={[x, FLOOR_HEIGHT / 2, z]}>
+              <boxGeometry args={[0.04, FLOOR_HEIGHT, 0.04]} />
+              <meshStandardMaterial color="#501BED" emissive="#501BED" emissiveIntensity={0.85} />
+            </mesh>
+          ))}
+          <mesh position={[0, FLOOR_HEIGHT / 2, 0]}>
+            <boxGeometry args={[0.94, FLOOR_HEIGHT - 0.03, 0.74]} />
+            <meshBasicMaterial color="#7344FF" transparent opacity={0.14} depthWrite={false} />
+            <Edges color={edgeColor} />
+          </mesh>
+        </group>
+      ))}
 
-      {/* Símbolo ">" (Direita) */}
-      <group position={[0.95, 0, 0]}>
-        <RoundedBox
-          args={[barThickness, 0.72, barThickness]}
-          radius={barRadius}
-          smoothness={4}
-          position={[0, 0.21, 0]}
-          rotation={[0, 0, Math.PI / 4]}
-        >
-          <meshStandardMaterial
-            color="#501BED"
-            emissive="#501BED"
-            emissiveIntensity={0.85}
-            metalness={0.65}
-            roughness={0.2}
-          />
-        </RoundedBox>
-        <RoundedBox
-          args={[barThickness, 0.72, barThickness]}
-          radius={barRadius}
-          smoothness={4}
-          position={[0, -0.21, 0]}
-          rotation={[0, 0, -Math.PI / 4]}
-        >
-          <meshStandardMaterial
-            color="#501BED"
-            emissive="#501BED"
-            emissiveIntensity={0.85}
-            metalness={0.65}
-            roughness={0.2}
-          />
-        </RoundedBox>
+      {/* Grua de obra */}
+      <group position={[0.75, 0, -0.35]}>
+        <mesh position={[0, 0.8, 0]}>
+          <boxGeometry args={[0.07, 1.6, 0.07]} />
+          <meshStandardMaterial color="#FFBD2E" emissive="#FFBD2E" emissiveIntensity={0.45} />
+          <Edges color="#FFD166" />
+        </mesh>
+        <group ref={craneJibRef} position={[0, 1.6, 0]}>
+          {/* Lança e contralança */}
+          <mesh position={[0.2, 0, 0]}>
+            <boxGeometry args={[1.3, 0.05, 0.05]} />
+            <meshStandardMaterial color="#FFBD2E" emissive="#FFBD2E" emissiveIntensity={0.45} />
+          </mesh>
+          {/* Contrapeso */}
+          <mesh position={[-0.38, -0.05, 0]}>
+            <boxGeometry args={[0.14, 0.1, 0.1]} />
+            <meshStandardMaterial color="#1F1D26" metalness={0.8} roughness={0.3} />
+          </mesh>
+          {/* Cabo + gancho com viga */}
+          <group ref={hookRef} position={[0.35, 0, 0]}>
+            <mesh position={[0, -0.25, 0]}>
+              <boxGeometry args={[0.008, 0.5, 0.008]} />
+              <meshBasicMaterial color="#E2E2E2" />
+            </mesh>
+            <mesh position={[0, -0.52, 0]}>
+              <boxGeometry args={[0.3, 0.035, 0.05]} />
+              <meshStandardMaterial color="#E2E2E2" emissive={accentColor} emissiveIntensity={0.5} />
+            </mesh>
+          </group>
+        </group>
       </group>
     </group>
   );
 };
 
 /**
- * Notebook 3D Ultra-Clean (DevBook Pro VKS) + Holograma "</>"
+ * Notebook 3D Ultra-Clean (DevBook Pro VKS) + Holograma do prédio em construção
  * Responsivo aos limites reais do viewport para nunca cortar nas bordas da tela
  */
 const VksDeveloperLaptop3D: React.FC<{
@@ -361,8 +390,8 @@ const VksDeveloperLaptop3D: React.FC<{
       scale={responsiveScale}
     >
       <Float speed={1.8} rotationIntensity={0.12} floatIntensity={0.3}>
-        {/* Símbolo Holográfico 3D "</>" flutuando em altura contida logo acima da tela */}
-        <CodeSymbol3D position={[0, 1.52, 0.25]} scale={0.68} accentColor={accentColor} />
+        {/* Prédio holográfico em construção flutuando logo acima da tela */}
+        <BlueprintBuilding3D position={[-0.35, 1.12, 0.25]} scale={0.62} accentColor={accentColor} />
 
         {/* ================= BASE DO NOTEBOOK (CHASSI INFERIOR) ================= */}
         <group position={[0, -0.55, 0]}>
