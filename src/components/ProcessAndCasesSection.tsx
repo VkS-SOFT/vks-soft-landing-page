@@ -16,6 +16,7 @@ export const ProcessAndCasesSection: React.FC = () => {
       client: 'Avalui',
       url: 'https://avalui.com.br',
       urlLabel: 'avalui.com.br',
+      preview: '/assets/cases/avalui.webp',
       title: 'Plataforma de Avaliações Imobiliárias e Emissão de PTAM',
       summary:
         'SaaS que automatiza todo o ciclo de avaliações imobiliárias e vistorias: coleta de dados do imóvel, cálculo pelo Método Comparativo Direto, prévia protegida e liberação do laudo em PDF após a confirmação automática do pagamento.',
@@ -31,6 +32,7 @@ export const ProcessAndCasesSection: React.FC = () => {
       client: 'Luminar Solar',
       url: 'https://v0-luminar-solar.vercel.app',
       urlLabel: 'Luminar Solar Engenharia e Arquitetura',
+      preview: '/assets/cases/luminar.webp',
       title: 'Site Institucional para Escritório de Engenharia Solar',
       summary:
         'Site da Luminar Solar Engenharia e Arquitetura, especializada em projetos e instalação de energia solar no litoral do Piauí. Apresenta serviços, portfólio de obras e depoimentos, com foco em transformar visitantes em pedidos de orçamento.',
@@ -102,6 +104,32 @@ export const ProcessAndCasesSection: React.FC = () => {
                 className="glass-card rounded-3xl p-7 flex flex-col justify-between border border-vks-white/10 hover:border-vks-primary/50"
               >
                 <div>
+                  {/* Preview do site em moldura de navegador */}
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Abrir o site ${item.client}`}
+                    className="group block mb-6 rounded-2xl overflow-hidden border border-vks-white/10 bg-vks-black/80 hover:border-vks-primary/60 transition-colors"
+                  >
+                    <div className="flex items-center gap-1.5 px-3 py-2 border-b border-vks-white/10">
+                      <span className="w-2 h-2 rounded-full bg-[#FF5F56]" />
+                      <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                      <span className="w-2 h-2 rounded-full bg-[#27C93F]" />
+                      <span className="ml-2 flex-1 truncate rounded-md bg-vks-surface px-2 py-0.5 font-mono text-[10px] text-vks-white/60">
+                        {item.url.replace('https://', '')}
+                      </span>
+                    </div>
+                    <img
+                      src={item.preview}
+                      alt={`Página inicial do site ${item.client}`}
+                      width={1200}
+                      height={575}
+                      loading="lazy"
+                      className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </a>
+
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-vks-primary/20 text-vks-primaryGlow border border-vks-primary/30">
                       {item.category}
