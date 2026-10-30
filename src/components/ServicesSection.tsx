@@ -1,12 +1,13 @@
 import React from 'react';
 import {
   ArrowUpRight,
-  Bot,
   CheckCircle2,
-  Database,
-  Globe,
+  ClipboardCheck,
+  FileText,
+  HardHat,
+  Home,
   Layers,
-  Smartphone,
+  Ruler,
   Workflow,
 } from 'lucide-react';
 
@@ -23,55 +24,55 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 }) => {
   const pillars = [
     {
-      id: 'web-saas',
-      badge: 'PILAR 01 • CORE WEB & CLOUD',
-      title: 'Desenvolvimento Web & Sistemas Sob Medida',
-      subtitle: 'SaaS Multi-Tenant, Plataformas Corporativas, ERPs & Portais B2B',
+      id: 'construtoras',
+      badge: 'SEGMENTO 01 • CONSTRUÇÃO CIVIL',
+      title: 'Construtoras & Incorporadoras',
+      subtitle: 'Gestão de Obras, Orçamento, Cronograma e Equipe de Campo',
       description:
-        'Projetamos plataformas robustas capazes de escalar de centenas a milhões de requisições sem gargalos. Substituímos planilhas fragmentadas e softwares engessados por sistemas proprietários desenhados para a sua operação.',
-      icon: Globe,
-      metrics: 'Arquitetura Service Pattern • REST/GraphQL • Real-time WebSockets',
+        'Tire a obra das planilhas e do WhatsApp. Desenvolvemos sistemas e apps que conectam escritório e canteiro: orçamento, medições, compras e diário de obra em um só lugar, com visão gerencial em tempo real.',
+      icon: HardHat,
+      metrics: 'Cronograma Físico-Financeiro • Medições • App Offline para o Canteiro',
       deliverables: [
-        'Plataformas SaaS prontas para recorrência (assinaturas, billing, multi-empresa)',
-        'ERPs, CRMs e Backoffices customizados com controle granular de permissões (RBAC)',
-        'Dashboards analíticos de alta densidade com atualização em tempo real',
-        'Refatoração e modernização de sistemas legados com migração segura de banco de dados',
+        'Orçamento de obras com composições, BDI e base SINAPI/própria',
+        'Cronograma físico-financeiro, medições e controle de custos por etapa',
+        'Diário de obra digital com fotos, checklists e assinatura do responsável',
+        'Portal do cliente/comprador para acompanhar o andamento da obra',
       ],
-      stack: ['PHP / Laravel', 'React.js', 'Vue.js', 'TypeScript', 'PostgreSQL', 'MySQL', 'Redis'],
+      stack: ['Gestão de Obras', 'App de Campo', 'Compras & Suprimentos', 'Dashboards'],
     },
     {
-      id: 'mobile-apps',
-      badge: 'PILAR 02 • ECOSSISTEMA MOBILE',
-      title: 'Aplicativos Mobile & Cross-Platform',
-      subtitle: 'Apps iOS & Android com Performance Nativa em Código Único',
+      id: 'imobiliario',
+      badge: 'SEGMENTO 02 • MERCADO IMOBILIÁRIO',
+      title: 'Imobiliárias & Avaliação de Imóveis',
+      subtitle: 'CRM Imobiliário, Portais, Laudos e Vistorias',
       description:
-        'Coloque sua empresa no bolso do seu cliente ou da sua equipe de campo. Desenvolvemos aplicativos fluidos a 60/120fps em Flutter e tecnologias nativas, reduzindo o time-to-market pela metade sem abrir mão da qualidade visual.',
-      icon: Smartphone,
-      metrics: 'Publicação App Store & Google Play • Offline-First • Push Notifications',
+        'Mais velocidade do lead ao contrato. Criamos plataformas para captar, avaliar e vender imóveis: de sites com busca inteligente a SaaS de laudos técnicos com cálculo estatístico e cobrança automatizada.',
+      icon: Home,
+      metrics: 'NBR 14653 • Método Comparativo • Pagamento Integrado (Pix/Boleto)',
       deliverables: [
-        'Aplicativos B2C de alta retenção (Fintechs, Delivery, Marketplaces, EdTechs, Saúde)',
-        'Apps corporativos para força de vendas, logística e operação em campo com sincronização offline',
-        'Integração nativa com biometria, câmera, geolocalização em background, Bluetooth e NFC',
-        'Gateways de pagamento integrados (Pix dinâmico, Apple Pay, Google Pay, Split de pagamento)',
+        'Laudos e PTAM automatizados conforme ABNT NBR 14653',
+        'Vistorias de entrada/saída e cautelares com fotos e relatório em PDF',
+        'CRM imobiliário com funil de leads, agenda de visitas e integração com portais',
+        'Sites de imóveis e lançamentos com busca, filtros e captação via WhatsApp',
       ],
-      stack: ['Flutter', 'Dart', 'iOS / Android', 'Firebase', 'WebSockets', 'Clean Architecture'],
+      stack: ['SaaS de Laudos', 'CRM', 'Portais de Imóveis', 'Pix / Boleto'],
     },
     {
-      id: 'ai-automation',
-      badge: 'PILAR 03 • HIPERAUTOMAÇÃO & IA',
-      title: 'Automações, IA & Arquitetura de Alta Performance',
-      subtitle: 'APIs de Alta Vazão, Mensageria Assíncrona, Bots & Agentes LLM',
+      id: 'engenharia',
+      badge: 'SEGMENTO 03 • ENGENHARIA & ARQUITETURA',
+      title: 'Escritórios de Engenharia & Arquitetura',
+      subtitle: 'Sites que Geram Clientes, Propostas e Automação Técnica',
       description:
-        'Elimine tarefas manuais repetitivas e integre todo o seu ecossistema. Construímos microsserviços em Python/FastAPI, filas distribuídas e agentes de Inteligência Artificial que qualificam leads e operam 24/7.',
-      icon: Bot,
-      metrics: 'Filas & Workers Assíncronos • RAG / Agentes de IA • Integrações Complexas',
+        'Presença digital à altura do seu projeto. Fazemos sites institucionais que transformam visitas em orçamentos, além de ferramentas que automatizam propostas, simulações e o acompanhamento de cada projeto.',
+      icon: Ruler,
+      metrics: 'SEO Local • Captação de Leads • Simuladores e Calculadoras',
       deliverables: [
-        'Agentes de IA conversacionais e copilotos internos treinados nos dados da sua empresa (RAG)',
-        'Orquestração de filas, mensageria e workers para processamento pesado sem travar o sistema',
-        'Integrações bidirecionais entre ERPs, gateways financeiros, WhatsApp Business API e CRMs',
-        'Scrapers, pipelines de dados automatizados e monitoramento ativo de infraestrutura',
+        'Sites institucionais e portfólio de obras otimizados para o Google',
+        'Simuladores e calculadoras técnicas (ex.: dimensionamento de energia solar)',
+        'Geração automática de propostas, memoriais e documentos técnicos',
+        'Gestão de projetos, ARTs/RRTs, prazos e clientes em um só painel',
       ],
-      stack: ['Python', 'FastAPI', 'RabbitMQ / Redis Queues', 'OpenAI / LLMs', 'Docker', 'Webhooks'],
+      stack: ['Sites & SEO', 'Simuladores', 'Propostas', 'Gestão de Projetos'],
     },
   ];
 
@@ -91,15 +92,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vks-primary/15 border border-vks-primary/40 text-xs font-mono text-vks-primaryGlow mb-4">
               <Layers className="w-3.5 h-3.5" />
-              <span>NOSSAS FRENTES DE ENGENHARIA</span>
+              <span>SOLUÇÕES POR SEGMENTO</span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
-              Três pilares tecnológicos para{' '}
-              <span className="text-gradient-vks">dominar seu mercado</span>
+              Software feito para quem{' '}
+              <span className="text-gradient-vks">constrói, projeta e vende imóveis</span>
             </h2>
           </div>
           <p className="text-vks-white/70 max-w-md text-sm sm:text-base leading-relaxed">
-            Passe o cursor ou selecione uma frente para sincronizar o núcleo 3D e explorar como desenhamos cada arquitetura.
+            Cada segmento tem processos, normas e dores próprias. Selecione o seu e veja o que podemos construir para a sua operação.
           </p>
         </div>
 
@@ -136,7 +137,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <div
                       className={`p-3 rounded-2xl transition-colors duration-300 ${
                         isActive
-                          ? 'bg-vks-primary text-white shadow-vks-glow'
+                          ? 'bg-vks-primary text-vks-onPrimary shadow-vks-glow'
                           : 'bg-vks-surfaceLight text-vks-white group-hover:bg-vks-primary/30'
                       }`}
                     >
@@ -188,8 +189,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     }}
                     className={`w-full py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-between transition-all duration-300 ${
                       isActive
-                        ? 'bg-vks-primary text-white shadow-vks-glow hover:bg-vks-primaryGlow'
-                        : 'bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-white'
+                        ? 'bg-vks-primary text-vks-onPrimary shadow-vks-glow hover:bg-vks-primaryGlow'
+                        : 'bg-vks-surfaceLight/80 text-vks-white hover:bg-vks-primary hover:text-vks-onPrimary'
                     }`}
                   >
                     <span>Orçar esta solução</span>
@@ -201,45 +202,46 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           })}
         </div>
 
-        {/* Faixa de Diferencial de Arquitetura */}
-        <div id="arquitetura" className="mt-16 glass-card rounded-3xl p-8 sm:p-10 border border-vks-primary/30">
+        {/* Faixa de Diferencial: conhecimento do setor */}
+        <div id="diferencial" className="mt-16 glass-card rounded-3xl p-8 sm:p-10 border border-vks-primary/30">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5 space-y-3">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-vks-primaryGlow">
-                <Workflow className="w-4 h-4" />
-                <span>PADRÃO DE ENGENHARIA VKS SOFT</span>
+                <HardHat className="w-4 h-4" />
+                <span>POR QUE A VKS SOFT</span>
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
-                Código limpo, desacoplado e preparado para escala real.
+                Tecnologia feita por quem entende de obra.
               </h3>
               <p className="text-sm text-vks-white/70 leading-relaxed">
-                Nada de código espaguete ou soluções improvisadas que travam quando sua operação cresce.
-                Aplicamos <strong className="text-white">Clean Code, SOLID, Service Patterns, Filas Assíncronas e CI/CD</strong> desde o primeiro commit.
+                Nosso fundador tem <strong className="text-white">formação técnica em Edificações</strong>. Unimos esse
+                conhecimento do setor com engenharia de software moderna para entregar sistemas que fazem sentido no
+                dia a dia de construtoras, imobiliárias e escritórios técnicos.
               </p>
             </div>
 
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-5 rounded-2xl bg-vks-black/70 border border-vks-white/10">
-                <Database className="w-5 h-5 text-vks-primaryGlow mb-2.5" />
-                <h4 className="font-display font-bold text-white text-base">Dados & Cache Otimizados</h4>
+                <ClipboardCheck className="w-5 h-5 text-vks-primaryGlow mb-2.5" />
+                <h4 className="font-display font-bold text-white text-base">Normas e Processos</h4>
                 <p className="text-xs text-vks-white/65 mt-1.5 leading-relaxed">
-                  Modelagem relacional avançada em PostgreSQL/MySQL combinada com Redis para respostas em milissegundos.
+                  Conhecemos NBRs, ART/RRT, medições e memoriais. Você não precisa ensinar o básico do setor.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-vks-black/70 border border-vks-white/10">
+                <FileText className="w-5 h-5 text-vks-primaryGlow mb-2.5" />
+                <h4 className="font-display font-bold text-white text-base">Do Papel ao Sistema</h4>
+                <p className="text-xs text-vks-white/65 mt-1.5 leading-relaxed">
+                  Transformamos planilhas, laudos e checklists em fluxos digitais com PDF, assinatura e histórico.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-vks-black/70 border border-vks-white/10">
                 <Workflow className="w-5 h-5 text-vks-primaryGlow mb-2.5" />
-                <h4 className="font-display font-bold text-white text-base">Mensageria & WebSockets</h4>
+                <h4 className="font-display font-bold text-white text-base">Escritório + Canteiro</h4>
                 <p className="text-xs text-vks-white/65 mt-1.5 leading-relaxed">
-                  Jobs em background, filas resilientes com retentativa automática e eventos em tempo real.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-vks-black/70 border border-vks-white/10">
-                <Globe className="w-5 h-5 text-vks-primaryGlow mb-2.5" />
-                <h4 className="font-display font-bold text-white text-base">UX/UI de Alta Conversão</h4>
-                <p className="text-xs text-vks-white/65 mt-1.5 leading-relaxed">
-                  Interfaces rápidas, acessíveis e desenhadas no Figma com foco na produtividade do usuário final.
+                  Web para a gestão, app para a obra e automações via WhatsApp conectando todo mundo.
                 </p>
               </div>
             </div>

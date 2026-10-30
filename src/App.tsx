@@ -39,7 +39,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-vks-black text-vks-white relative selection:bg-vks-primary selection:text-white bg-grid-pattern">
+    <div className="min-h-screen bg-vks-black text-vks-white relative selection:bg-vks-primary selection:text-vks-onPrimary bg-grid-pattern">
       {/* Cena 3D Interativa em Three.js (@react-three/fiber) */}
       <Suspense fallback={null}>
         <VksCoreScene

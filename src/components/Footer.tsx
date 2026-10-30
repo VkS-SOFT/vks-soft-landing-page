@@ -4,23 +4,23 @@ import { ArrowUpRight, Code2, Mail, MapPin, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative z-10 border-t border-vks-white/10 bg-[#141318]/90 backdrop-blur-xl pt-16 pb-12">
+    <footer className="relative z-10 border-t border-vks-white/10 bg-vks-darkest/90 backdrop-blur-xl pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-vks-white/10">
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <VksLogo className="h-12" showSubtitle={true} variant="dark" />
+            <VksLogo className="h-12" showSubtitle={true} />
             <p className="text-sm text-vks-white/70 max-w-sm leading-relaxed pt-2">
-              Engenharia de software sob medida, aplicativos mobile cross-platform e automações inteligentes de alta performance para empresas que buscam escala real.
+              Software especialista em construção civil e mercado imobiliário: sistemas, apps e sites para construtoras, imobiliárias e escritórios de engenharia e arquitetura.
             </p>
             <div className="flex items-center gap-4 pt-2 text-xs font-mono text-vks-white/60">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-vks-primaryGlow" />
-                Clean Architecture
+                ConTech & PropTech
               </span>
               <span className="flex items-center gap-1.5">
                 <Code2 className="w-4 h-4 text-vks-primaryGlow" />
-                High-Availability
+                Formação em Edificações
               </span>
             </div>
           </div>
@@ -28,27 +28,27 @@ export const Footer: React.FC = () => {
           {/* Soluções */}
           <div className="md:col-span-4 space-y-3">
             <h4 className="font-mono text-xs uppercase tracking-wider text-vks-primaryGlow font-semibold">
-              Frentes de Atuação
+              Segmentos Atendidos
             </h4>
             <ul className="space-y-2.5 text-sm text-vks-white/75">
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Desenvolvimento Web, SaaS & ERPs
+                  Construtoras & Incorporadoras
                 </a>
               </li>
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Aplicativos Mobile (Flutter / iOS & Android)
+                  Imobiliárias & Avaliação de Imóveis
                 </a>
               </li>
               <li>
                 <a href="#solucoes" className="hover:text-white transition-colors">
-                  Automações, Agentes de IA & Filas Assíncronas
+                  Escritórios de Engenharia & Arquitetura
                 </a>
               </li>
               <li>
-                <a href="#arquitetura" className="hover:text-white transition-colors">
-                  Consultoria de Arquitetura & Refatoração
+                <a href="#cases" className="hover:text-white transition-colors">
+                  Clientes: Avalui & Luminar Solar
                 </a>
               </li>
             </ul>
@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
             <div className="pt-3">
               <a
                 href="#diagnostico"
-                className="inline-flex items-center gap-2 text-xs font-mono text-white bg-vks-primary/25 hover:bg-vks-primary border border-vks-primary/50 px-4 py-2.5 rounded-xl transition-all"
+                className="inline-flex items-center gap-2 text-xs font-mono text-white hover:text-vks-onPrimary bg-vks-primary/25 hover:bg-vks-primary border border-vks-primary/50 px-4 py-2.5 rounded-xl transition-all"
               >
                 <span>Solicitar Proposta Técnica</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
