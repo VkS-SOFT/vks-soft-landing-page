@@ -56,9 +56,11 @@ const PROJECT_STAGES = [
 ];
 
 const BUDGET_RANGES = [
-  'R$ 15k – R$ 35k (MVP / Automação Pontual)',
-  'R$ 35k – R$ 80k (Plataforma / App Completo)',
-  'Acima de R$ 80k (Ecossistema Enterprise / Escala)',
+  'Até R$ 3 mil (site, automação simples ou ajuste pontual)',
+  'R$ 3 mil – R$ 8 mil (sistema enxuto, MVP de uma dor específica)',
+  'R$ 8 mil – R$ 20 mil (sistema completo com vários perfis de usuário)',
+  'Acima de R$ 20 mil (plataforma maior, a conversar)',
+  'Prefiro mensalidade (pagar por mês em vez de projeto fechado)',
   'Prefiro definir junto com o arquiteto na call',
 ];
 
