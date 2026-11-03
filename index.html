@@ -33,12 +33,13 @@
   </head>
   <body class="bg-vks-black text-vks-white antialiased selection:bg-vks-primary selection:text-vks-onPrimary overflow-x-hidden">
     <script>
-      // Aplica o tema salvo antes do React montar, evitando piscar o tema errado.
+      // Aplica o tema antes do React montar, evitando piscar o tema errado.
+      // Claro é o padrão; escuro só se o visitante escolheu antes.
+      var dark = false;
       try {
-        if (localStorage.getItem('vks-theme') === 'light') {
-          document.documentElement.dataset.theme = 'light';
-        }
+        dark = localStorage.getItem('vks-theme') === 'dark';
       } catch (e) {}
+      if (!dark) document.documentElement.dataset.theme = 'light';
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

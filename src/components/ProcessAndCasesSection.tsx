@@ -1,4 +1,5 @@
 import React from 'react';
+import { Reveal } from './Reveal';
 import {
   ArrowUpRight,
   Compass,
@@ -77,7 +78,7 @@ export const ProcessAndCasesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
         {/* Bloco 1: Cases de Impacto */}
         <div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vks-primary/15 border border-vks-primary/40 text-xs font-mono text-vks-primaryGlow mb-4">
                 <TrendingUp className="w-3.5 h-3.5" />
@@ -95,13 +96,13 @@ export const ProcessAndCasesSection: React.FC = () => {
               <span>Quero um projeto assim para minha empresa</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-            {cases.map((item) => (
+            {cases.map((item, i) => (
+              <Reveal key={item.client} delay={i * 120} className="h-full">
               <div
-                key={item.client}
-                className="glass-card rounded-3xl p-7 flex flex-col justify-between border border-vks-white/10 hover:border-vks-primary/50"
+                className="glass-card h-full rounded-3xl p-7 flex flex-col justify-between border border-vks-white/10 hover:border-vks-primary/50"
               >
                 <div>
                   {/* Preview do site em moldura de navegador */}
@@ -183,13 +184,14 @@ export const ProcessAndCasesSection: React.FC = () => {
                   </a>
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
         {/* Bloco 2: Metodologia de Entrega */}
         <div id="processo">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <Reveal className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-mono text-xs uppercase tracking-widest text-vks-primaryGlow">
               COMO TRABALHAMOS
             </span>
@@ -199,15 +201,15 @@ export const ProcessAndCasesSection: React.FC = () => {
             <p className="text-vks-white/70 text-sm sm:text-base mt-4">
               Transparência em prazos, custos e entregas, com o mesmo cuidado de um cronograma de obra bem executado.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((step) => {
+            {steps.map((step, i) => {
               const Icon = step.icon;
               return (
+                <Reveal key={step.num} delay={i * 100} className="h-full">
                 <div
-                  key={step.num}
-                  className="glass-card rounded-3xl p-7 relative overflow-hidden group"
+                  className="glass-card h-full rounded-3xl p-7 relative overflow-hidden group"
                 >
                   <div className="flex items-center justify-between mb-6">
                     <div className="p-3 rounded-2xl bg-vks-primary/20 text-vks-primaryGlow group-hover:bg-vks-primary group-hover:text-vks-onPrimary transition-colors">
@@ -224,6 +226,7 @@ export const ProcessAndCasesSection: React.FC = () => {
                     {step.desc}
                   </p>
                 </div>
+                </Reveal>
               );
             })}
           </div>
