@@ -1,6 +1,6 @@
 import React from 'react';
 import { VksLogo } from './VksLogo';
-import { ArrowUpRight, Code2, Mail, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Code2, Mail, MapPin, MessageCircle, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -62,7 +62,20 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm text-vks-white/75">
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-vks-primaryGlow shrink-0" />
-                <span>contato@vkssoft.com.br</span>
+                <a href="mailto:vkssoft56@gmail.com" className="hover:text-white transition-colors">
+                  vkssoft56@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MessageCircle className="w-4 h-4 text-vks-primaryGlow shrink-0" />
+                <a
+                  href="https://wa.me/5586995615930"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  (86) 99561-5930
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-vks-primaryGlow shrink-0" />

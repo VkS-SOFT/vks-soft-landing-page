@@ -1,4 +1,5 @@
 import React from 'react';
+import { Reveal } from './Reveal';
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -88,7 +89,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
     <section id="solucoes" className="relative py-24 lg:py-32 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabeçalho da Seção */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
+        <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vks-primary/15 border border-vks-primary/40 text-xs font-mono text-vks-primaryGlow mb-4">
               <Layers className="w-3.5 h-3.5" />
@@ -102,7 +103,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           <p className="text-vks-white/70 max-w-md text-sm sm:text-base leading-relaxed">
             Cada segmento tem processos, normas e dores próprias. Selecione o seu e veja o que podemos construir para a sua operação.
           </p>
-        </div>
+        </Reveal>
 
         {/* Grid de Cards Interativos 3D */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -111,11 +112,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             const isActive = activeServiceIndex === idx;
 
             return (
+              <Reveal key={pillar.id} delay={idx * 120} className="h-full">
               <div
-                key={pillar.id}
                 onMouseEnter={() => onSelectService(idx)}
                 onClick={() => onSelectService(idx)}
-                className={`group relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 cursor-pointer ${
+                className={`group relative h-full rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 cursor-pointer ${
                   isActive
                     ? 'glass-card border-vks-primary shadow-vks-glow -translate-y-2'
                     : 'glass-card hover:-translate-y-1.5'
@@ -198,6 +199,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   </button>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>

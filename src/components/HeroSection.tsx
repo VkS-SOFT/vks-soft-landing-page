@@ -38,6 +38,17 @@ export const HeroSection: React.FC = () => {
           ease: 'expo.out',
         }
       );
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.to('.hero-hud-card', {
+          y: -10,
+          duration: 3,
+          delay: 1.5,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert();
